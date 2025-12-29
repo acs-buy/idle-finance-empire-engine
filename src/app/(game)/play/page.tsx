@@ -2303,7 +2303,6 @@ function GameShell() {
                 {assetsByCategory.map((category) => {
                   const income = categoryIncome.totals[category.id] ?? 0;
                   const total = categoryIncome.totalIncome || 0;
-                  const percent = total > 0 ? (income / total) * 100 : 0;
                   const unlocked = isDemo || category.assets.some((asset) => {
                     const owned = state.assetsOwned[asset.id] ?? 0;
                     return owned > 0 || state.cash >= asset.unlockAtCash;
