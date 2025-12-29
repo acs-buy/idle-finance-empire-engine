@@ -38,6 +38,7 @@ import {
 } from "@/entitlements";
 import { createBrowserClient } from "@/supabase/client";
 import { getClientConfig } from "@/engine/config/client";
+import Link from "next/link";
 
 const assets = assetsData.assets as AssetConfig[];
 const upgrades = upgradesData.upgrades as UpgradeConfig[];
@@ -1863,6 +1864,12 @@ function GameShell() {
             </span>
           )}
           <div className="ml-auto flex items-center gap-2">
+            <Link
+              className="rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-slate-100 hover:bg-white/15"
+              href="/for-creators"
+            >
+              For Creators
+            </Link>
             {!isDemo &&
               !activeEntitlements.vipActive &&
               vipPlacementVariant === "header" && (
