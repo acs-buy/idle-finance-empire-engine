@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "id": "bull_market",
+      "name": "Bull Market",
+      "description": "Risk-on sentiment drives returns up.",
+      "durationSec": 300,
+      "multiplier": 1.25,
+      "weight": 50
+    },
+    {
+      "id": "bear_market",
+      "name": "Bear Market",
+      "description": "Drawdowns test your discipline.",
+      "durationSec": 300,
+      "multiplier": 0.85,
+      "weight": 35
+    },
+    {
+      "id": "flash_crash",
+      "name": "Flash Crash",
+      "description": "Short panic. Stay the course.",
+      "durationSec": 90,
+      "multiplier": 0.6,
+      "weight": 15
+    }
+  ]
+}

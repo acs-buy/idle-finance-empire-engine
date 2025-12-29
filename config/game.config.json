@@ -1,0 +1,59 @@
+{
+  "game": {
+    "name": "Idle Finance Empire",
+    "theme": "dark",
+    "currency": "USD",
+    "description": "Finance-flavored idle game where you grow a compounding portfolio and prestige your way to an empire."
+  },
+  "branding": {
+    "logoPath": "/favicon.ico",
+    "primaryColor": "#34d399"
+  },
+  "landing": {
+    "baseline": {
+      "heroTitle": "Turn spare minutes into a finance empire.",
+      "heroSubtitle": "Start earning immediately, stack upgrades fast, and push for VIP perks.",
+      "ctaLabel": "Start building wealth"
+    },
+    "variantC": {
+      "heroTitle": "Build wealth while you're offline.",
+      "heroSubtitle": "An idle finance game where compounding never sleeps.",
+      "ctaLabel": "Play free - no signup"
+    }
+  },
+  "economy": {
+    "baseIncome": 1,
+    "growthRate": 1.07,
+    "prestigeMultiplier": 0.01,
+    "prestigeMinNetWorth": 1000000,
+    "prestigeDivisor": 1000000,
+    "prestigeExponent": 0.5
+  },
+  "pricing": {
+    "vip": {
+      "label": "VIP (Coming soon)",
+      "tagline": "Boost offline earnings, faster prestige progression, cosmetic badge + supporter perks.",
+      "benefits": [
+        "Boost offline earnings",
+        "Faster prestige progression",
+        "Cosmetic badge + supporter perks"
+      ],
+      "buttonLabel": "Go VIP",
+      "manageLabel": "Manage VIP"
+    },
+    "boosts": [
+      {
+        "id": "offline_boost_24h",
+        "label": "Boost Offline x3 (24h)",
+        "multiplier": 3,
+        "durationHours": 24,
+        "description": "Boost offline earnings x3 for 24 hours."
+      }
+    ]
+  },
+  "demo": {
+    "incomeMultiplier": 100,
+    "tickMultiplier": 100,
+    "startingCash": 200
+  }
+}

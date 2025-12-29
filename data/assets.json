@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "savings_account",
+      "name": "Savings Account",
+      "category": "cash",
+      "baseCost": 10,
+      "costGrowth": 1.12,
+      "baseIncomePerSec": 0.05,
+      "unlockAtCash": 0,
+      "description": "Safe and slow. Your first compounding step."
+    },
+    {
+      "id": "etf_index",
+      "name": "Index ETF",
+      "category": "equity",
+      "baseCost": 120,
+      "costGrowth": 1.14,
+      "baseIncomePerSec": 0.8,
+      "unlockAtCash": 50,
+      "description": "Broad market exposure with steady returns."
+    },
+    {
+      "id": "rental_studio",
+      "name": "Rental Studio",
+      "category": "real_estate",
+      "baseCost": 900,
+      "costGrowth": 1.15,
+      "baseIncomePerSec": 6.5,
+      "unlockAtCash": 300,
+      "description": "Rent cash-flow starts to feel real."
+    },
+    {
+      "id": "corporate_bonds",
+      "name": "Corporate Bonds",
+      "category": "fixed_income",
+      "baseCost": 4000,
+      "costGrowth": 1.16,
+      "baseIncomePerSec": 30,
+      "unlockAtCash": 1200,
+      "description": "Stable yields for disciplined investors."
+    },
+    {
+      "id": "crypto_mining_rig",
+      "name": "Crypto Mining Rig",
+      "category": "crypto",
+      "baseCost": 15000,
+      "costGrowth": 1.17,
+      "baseIncomePerSec": 120,
+      "unlockAtCash": 5000,
+      "description": "Volatile returns, big upside."
+    },
+    {
+      "id": "hedge_fund_desk",
+      "name": "Hedge Fund Desk",
+      "category": "hedge",
+      "baseCost": 120000,
+      "costGrowth": 1.18,
+      "baseIncomePerSec": 1200,
+      "unlockAtCash": 25000,
+      "description": "Leverage your edge and scale aggressively."
+    }
+  ]
+}

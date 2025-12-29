@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "upgrades": [
+    {
+      "id": "upgrade_compound_basics",
+      "name": "Compounding Basics",
+      "description": "+20% total income. Make growth visible.",
+      "price": 200,
+      "unlockAtCash": 80,
+      "type": "global_multiplier",
+      "value": 1.2,
+      "stackable": false
+    },
+    {
+      "id": "upgrade_etf_rebalance",
+      "name": "ETF Rebalancing",
+      "description": "Index ETF income x1.5",
+      "price": 800,
+      "unlockAtCash": 300,
+      "type": "asset_multiplier",
+      "targetAssetId": "etf_index",
+      "value": 1.5,
+      "stackable": false
+    },
+    {
+      "id": "upgrade_real_estate_renovation",
+      "name": "Renovation Strategy",
+      "description": "Rental Studio income x1.6",
+      "price": 6000,
+      "unlockAtCash": 1200,
+      "type": "asset_multiplier",
+      "targetAssetId": "rental_studio",
+      "value": 1.6,
+      "stackable": false
+    },
+    {
+      "id": "upgrade_offline_cap_12h",
+      "name": "Longer Offline (12h)",
+      "description": "Increase offline cap to 12h (non-VIP baseline improvement).",
+      "price": 2500,
+      "unlockAtCash": 900,
+      "type": "offline_cap",
+      "value": 43200,
+      "stackable": false
+    },
+    {
+      "id": "upgrade_macro_insights",
+      "name": "Macro Insights",
+      "description": "+30% total income. You anticipate market shifts.",
+      "price": 18000,
+      "unlockAtCash": 6000,
+      "type": "global_multiplier",
+      "value": 1.3,
+      "stackable": false
+    }
+  ]
+}
