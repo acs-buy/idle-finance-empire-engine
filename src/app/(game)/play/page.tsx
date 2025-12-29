@@ -1833,9 +1833,6 @@ function GameShell() {
       minute: "2-digit",
     }).format(new Date(timestamp));
 
-  const formatPerMinute = (valuePerSec: number) =>
-    formatCurrency(valuePerSec * 60);
-
   const projectionCue = (incomePerSec: number) => {
     const incomePerHour = incomePerSec * 3600;
     if (incomePerHour >= 5000) {
