@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import assetsData from "../../../../data/assets.json";
 import upgradesData from "../../../../data/upgrades.json";
@@ -1719,7 +1720,7 @@ function GameShell() {
     });
   }, [hydrated, state, assetsByCategory, categoryIncome, expandedCategory]);
 
-  const assetCardById: Record<string, JSX.Element> = {};
+  const assetCardById: Record<string, React.ReactNode> = {};
   if (state) {
     engineConfig.assets.forEach((asset) => {
       const card = renderAssetCard(asset);
