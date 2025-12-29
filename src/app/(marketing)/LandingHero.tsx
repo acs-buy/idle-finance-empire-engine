@@ -13,7 +13,7 @@ const VARIANTS = ["B", "C"] as const;
 type Variant = (typeof VARIANTS)[number];
 
 export function LandingHero({ config }: { config: GameConfig }) {
-  const [variant, setVariant] = useState<Variant>("A");
+  const [variant, setVariant] = useState<Variant>("B");
 
   useEffect(() => {
     ensureUtmCaptured();

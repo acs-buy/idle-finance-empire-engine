@@ -2301,12 +2301,6 @@ function GameShell() {
             {investCategoryView === "list" && (
               <div className="space-y-2">
                 {assetsByCategory.map((category) => {
-                  const income = categoryIncome.totals[category.id] ?? 0;
-                  const total = categoryIncome.totalIncome || 0;
-                  const unlocked = isDemo || category.assets.some((asset) => {
-                    const owned = state.assetsOwned[asset.id] ?? 0;
-                    return owned > 0 || state.cash >= asset.unlockAtCash;
-                  });
                   return (
                     <button
                       key={category.id}
@@ -2663,18 +2657,22 @@ function GameShell() {
                     ? [
                         {
                           id: "real_estate",
+                          label: "Real Estate",
                           percent: allocation.realEstate * 100,
                         },
                         {
                           id: "financial_markets",
+                          label: "Financial Markets",
                           percent: allocation.markets * 100,
                         },
                         {
                           id: "businesses",
+                          label: "Businesses",
                           percent: allocation.business * 100,
                         },
                         {
                           id: "automation",
+                          label: "Automation & Leverage",
                           percent: allocation.automation * 100,
                         },
                       ]

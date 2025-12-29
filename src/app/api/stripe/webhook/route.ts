@@ -15,11 +15,17 @@ export const dynamic = "force-dynamic";
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
+type SubscriptionLike = {
+  id: string;
+  customer?: string | Stripe.Customer | Stripe.DeletedCustomer | null;
+  status?: Stripe.Subscription.Status | "incomplete_expired";
+  current_period_end?: number;
+  metadata?: Stripe.Metadata;
+};
+
 function getStripeClient(): Stripe | null {
   if (!stripeSecretKey) return null;
-  return new Stripe(stripeSecretKey, {
-    apiVersion: "2024-06-20",
-  });
+  return new Stripe(stripeSecretKey);
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -106,12 +112,19 @@ export async function POST(request: Request): Promise<NextResponse> {
       typeof session.subscription === "string" ? session.subscription : null;
   } else if (event.type === "invoice.paid") {
     const invoice = event.data.object as Stripe.Invoice;
+    const invoiceSubscription = (
+      invoice as Stripe.Invoice & {
+        subscription?: string | Stripe.Subscription | null;
+      }
+    ).subscription;
     baseRevenuePayload.amount = invoice.amount_paid ?? null;
     baseRevenuePayload.currency = invoice.currency ?? null;
     baseRevenuePayload.customer_id =
       typeof invoice.customer === "string" ? invoice.customer : null;
     baseRevenuePayload.subscription_id =
-      typeof invoice.subscription === "string" ? invoice.subscription : null;
+      typeof invoiceSubscription === "string"
+        ? invoiceSubscription
+        : invoiceSubscription?.id ?? null;
   }
 
   if (supabase) {
@@ -169,11 +182,19 @@ export async function POST(request: Request): Promise<NextResponse> {
     event.type === "invoice.payment_failed" ||
     event.type === "invoice.paid"
   ) {
-    let subscriptionData: Stripe.Subscription | null = null;
+    let subscriptionData: SubscriptionLike | null = null;
 
     if (event.type === "invoice.payment_failed" || event.type === "invoice.paid") {
       const invoice = event.data.object as Stripe.Invoice;
-      const subscriptionId = invoice.subscription;
+      const invoiceSubscription = (
+        invoice as Stripe.Invoice & {
+          subscription?: string | Stripe.Subscription | null;
+        }
+      ).subscription;
+      const subscriptionId =
+        typeof invoiceSubscription === "string"
+          ? invoiceSubscription
+          : invoiceSubscription?.id;
       if (typeof subscriptionId === "string") {
         try {
           subscriptionData = await stripe.subscriptions.retrieve(subscriptionId);
@@ -182,17 +203,16 @@ export async function POST(request: Request): Promise<NextResponse> {
         }
       }
     } else {
-      subscriptionData = event.data.object as Stripe.Subscription;
+      subscriptionData = event.data.object as SubscriptionLike;
     }
 
     if (!subscriptionData) {
       return NextResponse.json({ received: true });
     }
 
-    const customerId = typeof subscriptionData.customer === "string"
-      ? subscriptionData.customer
-      : null;
-    const subscriptionId = subscriptionData.id;
+    const customerId =
+      typeof subscriptionData.customer === "string" ? subscriptionData.customer : null;
+    const subscriptionId = subscriptionData.id ?? null;
 
     let anonymousId = subscriptionData.metadata?.anonymousId;
     if (!anonymousId) {
@@ -208,12 +228,21 @@ export async function POST(request: Request): Promise<NextResponse> {
       return NextResponse.json({ received: true });
     }
 
+    const subscriptionStatus = subscriptionData.status ?? "canceled";
+    const normalizedStatus =
+      subscriptionStatus === "incomplete_expired"
+        ? "incomplete"
+        : subscriptionStatus === "paused" || subscriptionStatus === "unpaid"
+        ? "past_due"
+        : subscriptionStatus;
+    const currentPeriodEndSec = subscriptionData.current_period_end ?? null;
+
     const normalized = normalizeVip({
       isVip: false,
-      vipStatus: subscriptionData.status,
-      vipCurrentPeriodEnd: subscriptionData.current_period_end * 1000,
+      vipStatus: normalizedStatus,
+      vipCurrentPeriodEnd: currentPeriodEndSec ? currentPeriodEndSec * 1000 : undefined,
       stripeCustomerId: customerId ?? undefined,
-      stripeSubscriptionId: subscriptionId,
+      stripeSubscriptionId: subscriptionId ?? undefined,
     });
 
     await upsertEntitlements(anonymousId, normalized);

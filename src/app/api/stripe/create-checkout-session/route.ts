@@ -15,9 +15,7 @@ const offlineBoostPriceId = process.env.STRIPE_PRICE_OFFLINE_BOOST_24H;
 
 function getStripeClient(): Stripe | null {
   if (!stripeSecretKey) return null;
-  return new Stripe(stripeSecretKey, {
-    apiVersion: "2024-06-20",
-  });
+  return new Stripe(stripeSecretKey);
 }
 
 async function getOrigin(): Promise<string> {
