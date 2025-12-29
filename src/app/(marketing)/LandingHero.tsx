@@ -49,6 +49,12 @@ export function LandingHero({ config }: { config: GameConfig }) {
           color={config.branding.primaryColor}
         />
         <Link
+          href="/for-creators"
+          className="inline-flex items-center justify-center rounded-full border border-slate-700 px-6 py-3 text-slate-100 transition hover:border-slate-500"
+        >
+          For Creators
+        </Link>
+        <Link
           href="/docs"
           className="inline-flex items-center justify-center rounded-full border border-slate-700 px-6 py-3 text-slate-100 transition hover:border-slate-500"
         >

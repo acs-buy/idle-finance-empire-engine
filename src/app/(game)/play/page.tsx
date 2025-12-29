@@ -1863,7 +1863,7 @@ function GameShell() {
               VIP Active
             </span>
           )}
-          <div className="ml-auto flex items-center gap-2">
+          <div className="flex w-full flex-wrap items-center gap-2 sm:ml-auto sm:w-auto">
             <Link
               className="rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-slate-100 hover:bg-white/15"
               href="/for-creators"
