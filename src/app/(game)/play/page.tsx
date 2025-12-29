@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import assetsData from "../../../../data/assets.json";
 import upgradesData from "../../../../data/upgrades.json";
-import { loadStripe } from "@stripe/stripe-js";
 import type { Session } from "@supabase/supabase-js";
 import {
   buyUpgrade,
@@ -45,9 +44,6 @@ const gameConfig = getClientConfig();
 const supabaseEnabled = Boolean(
   process.env.NEXT_PUBLIC_SUPABASE_URL &&
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "",
 );
 
 const baseEngineConfig: EngineConfig = {
