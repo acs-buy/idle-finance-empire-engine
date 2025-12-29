@@ -4,7 +4,7 @@ import defaultConfig from "../../../../../config/game.config.json";
 import { validateGameConfig } from "@/engine/config/validate";
 import type { GameConfig } from "@/engine/config/types";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 type LeaderboardRow = {
   user_id?: string | null;
